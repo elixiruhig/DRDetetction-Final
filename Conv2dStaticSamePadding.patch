@@ -1,0 +1,9 @@
+--- /content/drive/My Drive/efficientnet-pytorch/EfficientNet-PyTorch/EfficientNet-PyTorch-master/efficientnet_pytorch/utils.py
++++ /content/drive/My Drive/efficientnet-pytorch/EfficientNet-PyTorch/EfficientNet-PyTorch-master/efficientnet_pytorch/utils.py
+@@ -1,6 +1,5 @@
+ class Conv2dStaticSamePadding(nn.Conv2d):
+     """ 2D Convolutions like TensorFlow, for a fixed image size"""
+-
+     def __init__(self, in_channels, out_channels, kernel_size, image_size=None, **kwargs):
+         super().__init__(in_channels, out_channels, kernel_size, **kwargs)
+         self.stride = self.stride if len(self.stride) == 2 else [self.stride[0]] * 2

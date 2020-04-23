@@ -1,0 +1,5 @@
+1. open terminal. go into the DRDetection folder (cd DRDetection)
+2. type ls
+3. if you see manage.py file then youre in the right directory
+4. in the terminal type in: python manage.py runserver
+5. open browser and goto 127.0.0.1:8000/
