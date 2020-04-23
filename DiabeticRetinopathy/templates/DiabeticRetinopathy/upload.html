@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>dr-detection</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+     {% load static %}
+    <link rel="stylesheet" href="{% static 'DiabeticRetinopathy/style.css' %}">
+</head>
+
+<body>
+
+    <nav class="navbar bg-dark navbar-expand-sm">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="upload.html"><i class="fa fa-eye" style="font-size: 35px; "></i></a>
+          </div>
+          
+          <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item"><a href="{% url 'DR:user_logout' %}"><be>Logout</b></a></li>
+
+            <li class="nav-item"><a href="#"><be>About</b></a></li>
+            <li class="nav-item"><a href="{% url 'DR:teamview' %}"><be>Team</b></a></li>
+          </ul>
+        </div>
+    </nav>
+
+    <br><br>
+
+
+    
+
+
+
+    <div id="upload-section">
+
+        <div class="jumbotron">
+
+            <div class="header">
+                <i class="fa fa-upload icon" style="display: inline-block;"> UPLOAD FUNDUS</i>
+            </div>
+        
+        </div>
+        <br>
+        <div class="jumbotron">
+            <div class="upload-body">
+
+ <form action="" enctype="multipart/form-data" method="post">
+     {% csrf_token %}
+                <div id="info-table" class="info-table">
+
+                    <table>
+                        <tr>
+                            <td>First Name</td>
+                            <td></td>
+                            <td>{{ reportform.first_name }}</td>
+                            
+                        </tr>
+                        <tr>
+                            <td>Last Name</td>
+                            <td></td>
+                            <td>{{ reportform.last_name }}</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>Age</td>
+                            <td></td>
+                            <td>{{ reportform.age }}</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Gender</td>
+                            <td></td>
+                            <td>{{ reportform.gender }}</td>
+                        </tr>
+
+                        
+                        
+                        <tr>
+
+                        </tr>
+                    
+                    </table> 
+
+                        
+                </div>
+                <br><br>
+                <label for="fundus-upload" class="btn btn-outline-light btn-add upload-btn">Upload</label>
+                <input type="file" name="{{ reportform.photo.name }}" id="fundus-upload" class="fundus-upload" accept=".jpg, .jpeg, .png" style="display: none;">
+                <br><br>
+                <div class="fundus-preview" style="margin-left: auto; margin-right: auto;">
+                    <p>Image not yet uploaded...</p>
+                </div>
+
+                <br>
+                <div class="fundus-submit">
+                    <input type="submit" name="upload" class="btn btn-outline-light btn-add" value="Submit">
+                </div>
+     </form>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+    <br><br>
+    <footer><hr>BE Project<br>Diabetic Retinopathy Detection <br>Group 23 <br> <br></footer>
+
+
+</body>
+
+<script>
+
+    const input = document.querySelector('.fundus-upload');
+    const preview = document.querySelector('.fundus-preview');
+
+    input.style.opacity = 0;
+
+    const fileTypes = [
+        'image/jpeg',
+        'image/pjpeg',
+        'image/png'
+    ];
+
+    function validFileType(file) 
+    {
+        return fileTypes.includes(file.type);
+    }
+
+    function returnFileSize(number) 
+    {
+        if(number < 1024) 
+        {
+            return number + 'bytes';
+        } 
+        else if(number >= 1024 && number < 1048576) 
+        {
+            return (number/1024).toFixed(1) + 'KB';
+        } 
+        else if(number >= 1048576) 
+        {
+            return (number/1048576).toFixed(1) + 'MB';
+        }
+    }
+
+    input.addEventListener('change', updateImageDisplay);
+
+    function updateImageDisplay()
+    {
+
+        while(preview.firstChild) 
+        {
+            preview.removeChild(preview.firstChild);
+        }
+
+        const curFiles = input.files;
+        if(curFiles.length === 0)
+        {
+            const para = document.createElement('p');
+            para.textContent = 'No Image Selected....';
+            preview.appendChild(list);
+        }
+        else{
+            const list = document.createElement('ol');
+            preview.appendChild(list);
+
+            for(const file of curFiles)
+            {
+                const listItem = document.createElement('li');
+                const para = document.createElement('p');
+                if(validFileType(file)) 
+                {
+                    para.textContent = `File Name: ${file.name}, File Size: ${returnFileSize(file.size)}.`;
+                    const image = document.createElement('img');
+                    image.src = URL.createObjectURL(file);
+
+                    listItem.appendChild(image);
+                    listItem.appendChild(para);
+                } 
+                else {
+                    para.textContent = `File name ${file.name}: Not a valid file type. Update your selection.`;
+                    listItem.appendChild(para);
+                }
+
+                list.appendChild(listItem);
+            }
+        }
+    }
+
+</script>
+
+</html>

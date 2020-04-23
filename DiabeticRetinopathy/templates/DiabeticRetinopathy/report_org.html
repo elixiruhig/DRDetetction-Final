@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container" align="center">
+    <h3>Report</h3>
+        <img src="{{ photo.url }}" alt="haha" width="512px" height="512px">
+        <h1>CATEGORY : {{ category }}</h1>
+        <form method="post" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-default" name="Download">Download Report</button>
+        </form>
+    </div>
+</body>
+</html>

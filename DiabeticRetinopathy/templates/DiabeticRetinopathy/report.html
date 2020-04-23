@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'DiabeticRetinopathy/style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+
+<body>
+
+    <nav class="navbar bg-dark navbar-expand-sm">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="upload.html"><i class="fa fa-eye" style="font-size: 35px; "></i></a>
+          </div>
+          
+          <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item"><a href="login.html"><be>Login</b></a></li>
+            <li class="nav-item"><a href="#"><be>About</b></a></li>
+            <li class="nav-item"><a href="team.html"><be>Team</b></a></li>
+          </ul>
+        </div>
+    </nav>
+    <br>
+
+    <div class="jumbotron">
+        <h1 style="margin-left: 550px; color: rgb(166, 183, 39);">RESULT</h1><br>
+        <div class="upload-body">
+
+            
+            <br>
+            <div id="info-table" class="info-table">
+                <table>
+
+                    <tr>
+                        <td><b>Patient ID</b></td>
+                        <td>:</td>
+                        <td>{{ pid }}</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><b>NAME</b></td>
+                        <td>:</td>
+                        <td>{{ first_name }} {{ last_name }}</td>
+                    </tr>
+
+                    <tr>
+                        <td><b>AGE</b></td>
+                        <td>:</td>
+                        <td>{{ age }}</td>
+                    </tr>
+
+                    <tr>
+                        <td><b>GENDER</b></td>
+                        <td>:</td>
+                        <td>{{ gender }}</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3">
+                            <img src="{{ photo.url }}" alt="uploaded_fundus" width="512px" height="512px">
+                        </td>
+                        
+                    </tr>
+                    <!-- If you want to display name age and gender here too, just add nore trs-->
+                    <tr>
+                        <td><b>CATEGORY</b></td>
+                        <td>:</td>
+                        <td>{{ category }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <form method="post" action="" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-light btn-add" name="Download">Download Report</button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+    <br><br>
+    <footer><hr>BE Project<br>Diabetic Retinopathy Detection <br>Group 23 <br> <br></footer>
+    
+
+
+
+</body>
+</html>
+
+
+
+<!--
+<body>
+    <div class="container" align="center">
+    <h3>Report</h3>
+        <img src="{{ photo.url }}" alt="haha" width="512px" height="512px">
+        <h1>CATEGORY : {{ category }}</h1>
+        <form method="post" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-default" name="Download">Download Report</button>
+        </form>
+    </div>
+</body>
+</html>
+-->
